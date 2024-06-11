@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stadium/constants/constants.dart';
-import 'package:stadium/view/screens/home.dart';
+import 'package:stadium/view/screens/myticketsPage.dart';
+import 'package:stadium/view/screens/startBooking.dart';
 
 Widget gameListView() {
   return StreamBuilder<QuerySnapshot>(
@@ -23,7 +24,7 @@ Widget gameListView() {
                 document.data()! as Map<String, dynamic>;
             return InkWell(
               onTap: () {
-                nexpageNavigation(context, Home());
+                nextPageNavigation(context, StartBooking());
               },
               child: Card(
                 color: mainSecondaryColor,

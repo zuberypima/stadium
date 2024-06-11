@@ -10,7 +10,8 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
+TextEditingController _emailController = TextEditingController();
+TextEditingController _password = TextEditingController();
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
@@ -22,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Email Address"),
-            formFielOne("User@email.com"),
+            formFielOne("User@email.com",_emailController,false),
             SizedBox(
               height: 10,
             ),
             Text("Password"),
-            formFielOne("Password"),
+            formFielOne("Password",_password,true),
             SizedBox(
               height: 10,
             ),

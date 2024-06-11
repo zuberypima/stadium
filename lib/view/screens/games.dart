@@ -28,7 +28,6 @@ class _GamesPageState extends State<GamesPage> {
                         Text(DateTime.now().day.toString() +
                             '/' +
                             DateTime.now().month.toString()),
-                        // Text(DateTime.now().toString()),
                       ],
                     ),
                   ),
@@ -38,7 +37,6 @@ class _GamesPageState extends State<GamesPage> {
                         Text(DateTime.now().day.toString() +
                             '/' +
                             DateTime.now().month.toString()),
-                        // Text(DateTime.now().toString()),
                       ],
                     ),
                   ),
@@ -48,7 +46,6 @@ class _GamesPageState extends State<GamesPage> {
                         Text(DateTime.now().day.toString() +
                             '/' +
                             DateTime.now().month.toString()),
-                        // Text(DateTime.now().toString()),
                       ],
                     ),
                   ),
@@ -58,14 +55,13 @@ class _GamesPageState extends State<GamesPage> {
                         Text(DateTime.now().day.toString() +
                             '/' +
                             DateTime.now().month.toString()),
-                        // Text(DateTime.now().toString()),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            backgroundColor: mainbackgroundColor,
+            // backgroundColor: mainbackgroundColor,
             body: TabBarView(
               children: [
                 gameListView(),

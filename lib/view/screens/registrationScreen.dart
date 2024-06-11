@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stadium/services/authenticationService.dart';
 import 'package:stadium/view/screens/loginpage.dart';
 import 'package:stadium/view/widgets/formfieldOne.dart';
 
@@ -8,6 +9,10 @@ class RegistrationPage extends StatefulWidget {
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
+
+TextEditingController _fullName = TextEditingController();
+TextEditingController _emailController = TextEditingController();
+TextEditingController _password = TextEditingController();
 
 class _RegistrationPageState extends State<RegistrationPage> {
   @override
@@ -20,24 +25,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Register your account"),
-            SizedBox(height: 20,),
-            Text("Email Address"),
-            formFielOne("user@email.com"),
+            SizedBox(
+              height: 20,
+            ),
+            Text("Full Name"),
+            formFielOne("Alex Mgaya", _fullName, false),
             SizedBox(
               height: 10,
             ),
-            Text("Phone Number"),
-            formFielOne("0782 766 567"),
+            Text("Email Address"),
+            formFielOne("alex@email.com", _emailController, false),
             SizedBox(
               height: 10,
             ),
             Text("Password"),
-            formFielOne("Password"),
+            formFielOne("Password", _password, true),
             SizedBox(
               height: 5,
             ),
             Text("Confirm"),
-            formFielOne("Password"),
+            formFielOne("Password", _password, true),
             SizedBox(
               height: 10,
             ),
@@ -47,7 +54,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.green),
                         foregroundColor: WidgetStatePropertyAll(Colors.white)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Authenticationservice().CreateUserWithEmailAndPassword(
+                          _emailController.text, _password.text);
+                    },
                     child: Text("Register"))),
             SizedBox(
               height: 30,
@@ -61,9 +71,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   SizedBox(
                     width: 5,
                   ),
-                  TextButton(onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
-                  }, child: Text("Login"))
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginPage()));
+                      },
+                      child: Text("Login"))
                 ],
               ),
             ),

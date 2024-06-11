@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stadium/view/screens/ticketsBook.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class StartBooking extends StatefulWidget {
+  const StartBooking({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<StartBooking> createState() => _StartBookingState();
 }
 
-class _HomeState extends State<Home> {
+class _StartBookingState extends State<StartBooking> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -32,7 +32,8 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: TabBarView(
+        body:
+         TabBarView(
           children: [
             TicketsbookView(pageLabele: "Regula Tickets"),
             TicketsbookView(pageLabele: "Standard Tickets"),
