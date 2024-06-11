@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stadium/constants/constants.dart';
+import 'package:stadium/view/screens/home.dart';
 
 Widget gameListView() {
   return StreamBuilder<QuerySnapshot>(
@@ -20,15 +21,21 @@ Widget gameListView() {
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data =
                 document.data()! as Map<String, dynamic>;
-            return Card(
-              color: mainSecondaryColor,
-              child: ListTile(
-                title: Text(
-                  data['HomeTeam'],
-                  style: TextStyle(color: textColorOne),
+            return InkWell(
+              onTap: () {
+                nexpageNavigation(context, Home());
+              },
+              child: Card(
+                color: mainSecondaryColor,
+                child: ListTile(
+                  leading:const CircleAvatar(child: Text("TM")),
+                  title: Text(
+                    data['HomeTeam'],
+                    style: TextStyle(color: textColorOne),
+                  ),
+                  subtitle: Text(data['AwayTeam'],
+                      style: TextStyle(color: textColorOne)),
                 ),
-                subtitle: Text(data['AwayTeam'],
-                    style: TextStyle(color: textColorOne)),
               ),
             );
           }).toList(),
