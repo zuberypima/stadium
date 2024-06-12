@@ -6,9 +6,9 @@ import 'package:stadium/view/screens/loginpage.dart';
 import 'package:stadium/view/screens/registrationScreen.dart';
 import 'package:stadium/view/seetViewPage.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
       options: FirebaseOptions(
     apiKey: "AIzaSyC9PtWCgmyHUoTYXTOLYz7KzWoMWFQfAX4",
     appId: "1:568287323336:android:e957fe1372a433aefc71fd",

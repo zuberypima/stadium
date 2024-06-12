@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class DataService {
   final CollectionReference collection = FirebaseFirestore.instance
@@ -30,5 +31,17 @@ class DataService {
       createSeats(i.toString());
       print(i.toString());
     }
+  }
+
+
+  
+
+
+   Future<void> createGames() {
+    return FirebaseFirestore.instance.collection('Games').add({
+      "PlayDate": '',
+      "AwayTeam": 'JKT-Ruvu',
+      "HomeTeam": "Costal Union",
+    });
   }
 }

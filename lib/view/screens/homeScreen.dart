@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stadium/constants/constants.dart';
+import 'package:stadium/view/screens/addDataTofirebase.dart';
 import 'package:stadium/view/screens/games.dart';
 import 'package:stadium/view/screens/myticketsPage.dart';
 import 'package:stadium/view/screens/profileScreen.dart';
@@ -10,7 +12,7 @@ class Homescreen extends StatefulWidget {
   State<Homescreen> createState() => _HomescreenState();
 }
 
-int _selectedIndex = 0;
+int _selectedIndex = 1;
 List<Widget> screenList = [
   MyTicketsPage(),
   GamesPage(),
@@ -36,6 +38,12 @@ class _HomescreenState extends State<Homescreen> {
                 icon: Icon(Icons.sports_basketball_rounded), label: "Games"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
           ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          nextPageNavigation(context, AddDataScreen());
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 
