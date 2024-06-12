@@ -15,8 +15,10 @@ class _TicketsbookViewState extends State<TicketsbookView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.pageLabele),),
-      body: stadium_layout(context)
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(widget.pageLabele),),
+      body: stadium_layout(context,widget.pageLabele)
     );
   }
 }

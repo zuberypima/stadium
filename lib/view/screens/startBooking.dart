@@ -16,6 +16,10 @@ class _StartBookingState extends State<StartBooking> {
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
+            indicatorColor: Colors.green,
+            labelColor: Colors.green,
+            // indicator: BoxDecoration(
+                // color: Colors.green, border: Border.all(color: Colors.green)),
             tabs: [
               Tab(
                 child: Text("Regular"),
@@ -32,8 +36,7 @@ class _StartBookingState extends State<StartBooking> {
             ],
           ),
         ),
-        body:
-         TabBarView(
+        body: TabBarView(
           children: [
             TicketsbookView(pageLabele: "Regula Tickets"),
             TicketsbookView(pageLabele: "Standard Tickets"),

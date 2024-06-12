@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:stadium/services/dataservices.dart';
 
 class SeatLayout extends StatefulWidget {
-  const SeatLayout({super.key});
+  String seatCategory;
+  SeatLayout({super.key, required this.seatCategory});
 
   @override
   State<SeatLayout> createState() => _SeatLayoutState();
@@ -15,9 +16,9 @@ class _SeatLayoutState extends State<SeatLayout> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Colors.green,
           title: Text(
-            "Seal Layout",
+            widget.seatCategory,
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -40,13 +41,17 @@ class _SeatLayoutState extends State<SeatLayout> {
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   Map<String, dynamic> item = data[index];
-                  return Card(
-                    color: item['Status']=='Available'?Colors.grey:Colors.green,
-                    child: Column(
-                      children: [
-                        Icon(Icons.chair),
-                        Text(item['SetatNo']),
-                      ],
+                  return InkWell(
+                    onTap: () {
+                      byTicketFunction();
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Icon(Icons.chair),
+                          Text(item['SetatNo']),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -56,5 +61,40 @@ class _SeatLayoutState extends State<SeatLayout> {
         ),
       ),
     );
+  }
+
+  byTicketFunction() {
+    return showDialog(
+        context: context,
+        builder: (contex) {
+          return AlertDialog(
+            content: Container(
+                height: MediaQuery.of(context).size.height / 2.5,
+                child: Center(
+                  child: Text("Your about to by a Ticket"),
+                )),
+            actions: [
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.red),
+                      foregroundColor: WidgetStatePropertyAll(Colors.white)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancel")),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.green),
+                      foregroundColor: WidgetStatePropertyAll(Colors.white)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK")),
+            ],
+          );
+        });
   }
 }

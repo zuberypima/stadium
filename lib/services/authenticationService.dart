@@ -1,14 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:stadium/constants/constants.dart';
+import 'package:stadium/view/screens/homeScreen.dart';
 
 class Authenticationservice {
   Future<void> CreateUserWithEmailAndPassword(
       String emailAddress, password) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
-      );
+      )
+          .then((context) {
+        nextPageNavigation(context, Homescreen());
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -24,7 +30,10 @@ class Authenticationservice {
       String emailAddress, password) async {
     try {
       final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
+          .signInWithEmailAndPassword(email: emailAddress, password: password)
+          .then((context) {
+        nextPageNavigation(context, Homescreen());
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
