@@ -17,7 +17,6 @@ Widget gameListView() {
             child: CircularProgressIndicator(),
           );
         }
-
         return ListView(
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data =

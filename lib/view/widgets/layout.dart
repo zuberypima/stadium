@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stadium/view/allSeetView.dart';
 import 'package:stadium/view/widgets/seatLayout.dart';
 
 Widget stadium_layout(context, category) {
@@ -9,7 +10,7 @@ Widget stadium_layout(context, category) {
         ElevatedButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SeatLayout(seatCategory: 'North'+'-'+ category,)));
+                  .push(MaterialPageRoute(builder: (context) => AllseatView()));
             },
             child: Text("North Side")),
         SizedBox(
@@ -18,7 +19,7 @@ Widget stadium_layout(context, category) {
         ElevatedButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SeatLayout(seatCategory: 'Left'+'-'+category,)));
+                  .push(MaterialPageRoute(builder: (context) => AllseatView()));
             },
             child: Text("Left Side")),
         SizedBox(
@@ -27,7 +28,7 @@ Widget stadium_layout(context, category) {
         ElevatedButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SeatLayout(seatCategory: 'Right'+'-'+category,)));
+                  .push(MaterialPageRoute(builder: (context) => AllseatView()));
             },
             child: Text("Right Side")),
         SizedBox(
@@ -36,7 +37,7 @@ Widget stadium_layout(context, category) {
         ElevatedButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SeatLayout(seatCategory: 'South'+'-'+category,)));
+                  .push(MaterialPageRoute(builder: (context) => AllseatView()));
             },
             child: Text("South Side"))
       ],

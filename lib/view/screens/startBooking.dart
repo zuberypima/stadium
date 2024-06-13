@@ -38,7 +38,7 @@ class _StartBookingState extends State<StartBooking> {
         ),
         body: TabBarView(
           children: [
-            TicketsbookView(pageLabele: "Regula Tickets"),
+            TicketsbookView(pageLabele: "Regular Tickets"),
             TicketsbookView(pageLabele: "Standard Tickets"),
             TicketsbookView(pageLabele: "VIP-B Tickets"),
             TicketsbookView(pageLabele: "VIP-A Tickets"),

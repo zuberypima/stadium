@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stadium/constants/constants.dart';
 import 'package:stadium/services/dataservices.dart';
 import 'package:stadium/view/widgets/gameListView.dart';
@@ -13,6 +14,13 @@ class GamesPage extends StatefulWidget {
 
 class _GamesPageState extends State<GamesPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    generateWeekDates(DateTime.now());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
@@ -21,43 +29,11 @@ class _GamesPageState extends State<GamesPage> {
             appBar: AppBar(
               elevation: 0,
               bottom: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorColor: Colors.green,
                 tabs: [
-                  Tab(
-                    child: Column(
-                      children: [
-                        Text(DateTime.now().day.toString() +
-                            '/' +
-                            DateTime.now().month.toString()),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Column(
-                      children: [
-                        Text(DateTime.now().day.toString() +
-                            '/' +
-                            DateTime.now().month.toString()),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Column(
-                      children: [
-                        Text(DateTime.now().day.toString() +
-                            '/' +
-                            DateTime.now().month.toString()),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Column(
-                      children: [
-                        Text(DateTime.now().day.toString() +
-                            '/' +
-                            DateTime.now().month.toString()),
-                      ],
-                    ),
-                  ),
+                  for (String date in generateWeekDates(DateTime.now()))
+                    Tab(text: date.toString()),
                 ],
               ),
             ),
@@ -72,5 +48,16 @@ class _GamesPageState extends State<GamesPage> {
             )),
       ),
     );
+  }
+
+  List<String> generateWeekDates(DateTime startDate) {
+    List<String> dates = [];
+    DateFormat dateFormat = DateFormat('dd-MM');
+
+    for (int i = 0; i < 4; i++) {
+      DateTime date = startDate.add(Duration(days: i));
+      dates.add(dateFormat.format(date));
+    }
+    return dates;
   }
 }

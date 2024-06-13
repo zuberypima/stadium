@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stadium/services/dataservices.dart';
 
-
 class AddDataScreen extends StatefulWidget {
   const AddDataScreen({super.key});
 
@@ -16,9 +15,19 @@ class _AddDataScreenState extends State<AddDataScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          ElevatedButton(onPressed: (){
-            DataService().createGames();
-          }, child:Text(" Add Games"))
+          ElevatedButton(
+              onPressed: () {
+                DataService().loopFunc();
+              },
+              child: Text(" Add Games")),
+          SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                DataService().createSeats(100);
+              },
+              child: Text(" Add Database"))
         ],
       ),
     );

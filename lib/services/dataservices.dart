@@ -18,7 +18,7 @@ class DataService {
       .doc('North')
       .collection('VIPA');
 
-  Future<void> createSeats(String seatNum) {
+  Future<void> createSeats(int seatNum) {
     return database.add({
       "GameNo": '1001',
       "SetatNo": seatNum,
@@ -28,7 +28,7 @@ class DataService {
 
   void loopFunc() {
     for (var i = 1; i < 200; i++) {
-      createSeats(i.toString());
+      createSeats(i);
       print(i.toString());
     }
   }
