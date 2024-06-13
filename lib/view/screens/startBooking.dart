@@ -17,9 +17,9 @@ class _StartBookingState extends State<StartBooking> {
         appBar: AppBar(
           bottom: TabBar(
             indicatorColor: Colors.green,
-            labelColor: Colors.green,
-            // indicator: BoxDecoration(
-                // color: Colors.green, border: Border.all(color: Colors.green)),
+            labelStyle:
+                TextStyle(color: Colors.green, fontWeight: FontWeight.w600),
+            indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
               Tab(
                 child: Text("Regular"),
