@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stadium/constants/constants.dart';
+import 'package:stadium/view/screens/paymentList.dart';
 import 'package:stadium/view/widgets/profileCard.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -11,17 +13,24 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello "),
-      ),
-      body: ListView(
-        children: [
-          profileCardWidget('Notifications',Icons.notifications_none),
-          profileCardWidget('Payments',Icons.payment),
-          profileCardWidget('Settings',Icons.settings),
-          profileCardWidget('Help & info',Icons.help),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Hello"),
+          
+        ),
+        body: ListView(
+          children: [
+            profileCardWidget('Notifications',Icons.notifications_none),
+            InkWell(
+              onTap: () {
+                nextPageNavigation(context, PaymentMethodLis());
+              },
+              child: profileCardWidget('Payments',Icons.payment)),
+            profileCardWidget('Settings',Icons.settings),
+            profileCardWidget('Help & info',Icons.help),
+          ],
+        ),
       ),
     );
   }

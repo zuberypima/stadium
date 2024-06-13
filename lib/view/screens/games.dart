@@ -28,6 +28,7 @@ class _GamesPageState extends State<GamesPage> {
         child: Scaffold(
             appBar: AppBar(
               elevation: 0,
+              
               bottom: TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.green,

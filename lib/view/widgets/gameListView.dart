@@ -26,7 +26,7 @@ Widget gameListView() {
                 nextPageNavigation(context, StartBooking());
               },
               child: Card(
-                color: mainSecondaryColor,
+                color: Colors.blueGrey,
                 child: ListTile(
                   leading:const CircleAvatar(child: Text("TM")),
                   title: Text(
