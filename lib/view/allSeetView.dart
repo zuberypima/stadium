@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:stadium/services/bookingServices.dart';
 import 'package:stadium/services/dataservices.dart';
 
 class AllseatView extends StatefulWidget {
@@ -87,10 +88,18 @@ class _AllseatViewState extends State<AllseatView> {
                         )
                       ],
                     ),
-                    Column(
+                    const Column(
                       children: [
-                        Icon(Icons.book_outlined,size: 30,color: Colors.blueGrey,),
-                        Text('0',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600),)
+                        Icon(
+                          Icons.book_outlined,
+                          size: 30,
+                          color: Colors.blueGrey,
+                        ),
+                        Text(
+                          '0',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w600),
+                        )
                       ],
                     )
                   ],
@@ -104,21 +113,23 @@ class _AllseatViewState extends State<AllseatView> {
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
-                        return Center(child: Text('Something went wrong'));
+                        return const Center(
+                            child: Text('Something went wrong'));
                       }
 
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return Center(child: Text('No seats available'));
+                        return const Center(child: Text('No seats available'));
                       }
 
                       return GridView.builder(
                         itemCount: snapshot.data?.docs.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 5, childAspectRatio: 1.5),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5, childAspectRatio: 1.5),
                         itemBuilder: (BuildContext context, int index) {
                           var document = snapshot.data!.docs[index];
                           Map<String, dynamic> data =
@@ -126,10 +137,14 @@ class _AllseatViewState extends State<AllseatView> {
 
                           return InkWell(
                             onTap: () {
-                              if (data['Status'] != 'Available') {
-                                alreadySoldTicket(data['Status']).toString();
+                              if (data['Status'] == 'Available') {
+                                // alreadySoldTicket(data['Status']).toString();
+                                Bookingservices().bookingOnProgress(document.id.toString());
+                              } else if (data['Status'] =='OnProgress') {
+                                //  alreadySoldTicket(data['Status']).toString();
+                                bookingOnProgress();
                               } else {
-                                byTicketFunction();
+                                 alreadySoldTicket(data['Status']).toString();
                               }
                             },
                             child: Card(
@@ -140,11 +155,11 @@ class _AllseatViewState extends State<AllseatView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   data['Status'] == 'Sold'
-                                      ? Icon(
+                                      ? const Icon(
                                           Icons.not_accessible_rounded,
                                           color: Colors.red,
                                         )
-                                      : Icon(Icons.chair),
+                                      : const Icon(Icons.chair),
                                   Text(data['SetatNo'].toString()),
                                 ],
                               ),
@@ -163,30 +178,30 @@ class _AllseatViewState extends State<AllseatView> {
     );
   }
 
-  byTicketFunction() {
+  bookingOnProgress() {
     return showDialog(
         context: context,
         builder: (contex) {
           return AlertDialog(
             content: Container(
                 height: MediaQuery.of(context).size.height / 2.5,
-                child: Center(
+                child: const Center(
                   child: Text("Your about to by a Ticket"),
                 )),
             actions: [
               ElevatedButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.red),
                       foregroundColor: WidgetStatePropertyAll(Colors.white)),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text("Cancel")),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               ElevatedButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.green),
                       foregroundColor: WidgetStatePropertyAll(Colors.white)),
                   onPressed: () {
@@ -211,18 +226,18 @@ class _AllseatViewState extends State<AllseatView> {
                 )),
             actions: [
               ElevatedButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.red),
                       foregroundColor: WidgetStatePropertyAll(Colors.white)),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text("Cancel")),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               ElevatedButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.green),
                       foregroundColor: WidgetStatePropertyAll(Colors.white)),
                   onPressed: () {
