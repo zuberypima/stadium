@@ -9,6 +9,7 @@ import 'package:stadium/view/screens/loginpage.dart';
 import 'package:stadium/view/screens/profileScreen.dart';
 import 'package:stadium/view/screens/registrationScreen.dart';
 import 'package:stadium/view/seetViewPage.dart';
+import 'package:stadium/view/widgets/paymentMethod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

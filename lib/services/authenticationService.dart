@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stadium/constants/constants.dart';
@@ -41,5 +42,21 @@ class Authenticationservice {
         print('Wrong password provided for that user.');
       }
     }
+  }
+
+
+   Future<void> addUserDetailToDataBase(String emailAddress,fullname) {
+    return FirebaseFirestore.instance.collection('UsersDetails').doc(emailAddress).set({
+      "UserName": fullname,
+      "Email": emailAddress
+    });
+  }
+
+
+   Future<void> userPaymentMethod(String emailAddress,_phoneNumber) {
+    return FirebaseFirestore.instance.collection('UsersDetails').doc(emailAddress).collection(_phoneNumber).doc(_phoneNumber).set({
+      "PhoneNumber": _phoneNumber,
+      "Ammount": "600000"
+    });
   }
 }

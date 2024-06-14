@@ -23,9 +23,11 @@ Widget paymentDetails(context) {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.blue),
+                    backgroundColor: WidgetStatePropertyAll(Colors.lightBlue),
                     foregroundColor: WidgetStatePropertyAll(Colors.white)),
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 child: Text('Add Payment Method')))
       ],
     ),

@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stadium/constants/constants.dart';
 import 'package:stadium/view/screens/loginpage.dart';
 
 Widget accountDetailsContainer(context) {
+  final FirebaseAuth _auth =FirebaseAuth.instance;
   return FutureBuilder<DocumentSnapshot>(
+
     future:
-        FirebaseFirestore.instance.collection("UsersDetails").doc("Pima").get(),
+        FirebaseFirestore.instance.collection("UsersDetails").doc(_auth.currentUser!.email).get(),
     builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
       if (snapshot.hasError) {
         return Text("Something went wrong");
@@ -30,17 +33,13 @@ Widget accountDetailsContainer(context) {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                       style: ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(Colors.green),
+                          backgroundColor: WidgetStatePropertyAll(Colors.lightBlue),
                           foregroundColor:
                               WidgetStatePropertyAll(Colors.white)),
                       onPressed: () {
                         nextPageNavigation(context, LoginPage());
                       },
                       child: Text("Sign in")))
-              // Text(
-              //   'Zubery Pima',
-              //   style: TextStyle(fontSize: 15),
-              // )
             ],
           ),
         );
@@ -64,7 +63,7 @@ Widget accountDetailsContainer(context) {
               ),
               SizedBox(height: 3),
               Text(
-                'Zubery Pima',
+                data['UserName'].toString(),
                 style: TextStyle(fontSize: 15),
               )
             ],

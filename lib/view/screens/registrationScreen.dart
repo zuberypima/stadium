@@ -13,6 +13,8 @@ class RegistrationPage extends StatefulWidget {
 TextEditingController _fullName = TextEditingController();
 TextEditingController _emailController = TextEditingController();
 TextEditingController _password = TextEditingController();
+TextEditingController _passwordConfirm = TextEditingController();
+
 
 class _RegistrationPageState extends State<RegistrationPage> {
   @override
@@ -20,11 +22,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
-            Text("Register your account"),
+            Padding(
+              padding: const EdgeInsets.only(top: 30, left: 10),
+              child: Text("Register your account"),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -44,22 +47,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
               height: 5,
             ),
             Text("Confirm"),
-            formFielOne("Password", _password, true),
+            formFielOne("Password", _passwordConfirm, true),
             SizedBox(
               height: 10,
             ),
             SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.green),
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(Colors.lightBlue),
                         foregroundColor: WidgetStatePropertyAll(Colors.white)),
                     onPressed: () {
-                      Authenticationservice().CreateUserWithEmailAndPassword(
-                          _emailController.text, _password.text);
+                      Authenticationservice()
+                          .CreateUserWithEmailAndPassword(
+                              _emailController.text, _password.text)
+                          .then((context) {
+                        Authenticationservice().addUserDetailToDataBase(
+                            _emailController.text, _fullName.text);
+                      });
                     },
                     child: Text("Register"))),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
@@ -84,5 +93,39 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
       ),
     );
+  }
+
+  // Loading Details
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(width: 20),
+                Text("Loading..."),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onButtonPressed(BuildContext context) async {
+    // Show the loading dialog
+    _showLoadingDialog(context);
+
+    // Simulate a network call or a time-consuming task
+    await Future.delayed(Duration(seconds: 3));
+
+    // Close the loading dialog
+    Navigator.of(context).pop();
   }
 }

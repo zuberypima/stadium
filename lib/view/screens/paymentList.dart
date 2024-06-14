@@ -17,25 +17,24 @@ class _PaymentMethodLisState extends State<PaymentMethodLis> {
       appBar: AppBar(
         title: Text("Bill & Payments"),
       ),
-       body: ListView(
+      body: ListView(
         children: [
-
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: accountDetailsContainer(context),
-        ),
-            Divider(),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: accountBalanceContainer(context),
-        ),
-                    Divider(),
- Padding(
-   padding: const EdgeInsets.only(left: 10),
-   child: paymentDetails(context),
- )
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: accountDetailsContainer(context),
+          ),
+          Divider(),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: accountBalanceContainer(context),
+          ),
+          Divider(),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: paymentDetails(context),
+          )
         ],
-       ),
+      ),
     );
   }
 }
