@@ -7,7 +7,7 @@ class TicketDataProvider extends ChangeNotifier {
 
   void getLiskInCart(int numberInCat) {
     _listInCart = numberInCat;
-    print("Here is "+_listInCart.toString());
+    print("Provider value"+_listInCart.toString());
     notifyListeners();
   }
 }

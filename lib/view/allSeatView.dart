@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stadium/provider/ticketDataProvider.dart';
 import 'package:stadium/services/bookingServices.dart';
-import 'package:stadium/services/dataservices.dart';
 import 'package:stadium/view/widgets/indicatorContainer.dart';
 
 class AllseatView extends StatefulWidget {
@@ -21,6 +20,23 @@ class _AllseatViewState extends State<AllseatView> {
     Bookingservices().ticketList(context);
   }
 
+  String _text = "0";
+
+  // final int provider =
+  // Provider.of<TicketDataProvider>(context, listen: false).listInCart;
+  void _updateText() {
+    setState(() {
+      print("vaule go to text" +
+          Provider.of<TicketDataProvider>(context, listen: false)
+              .listInCart
+              .toString());
+      _text = Provider.of<TicketDataProvider>(context, listen: false)
+          .listInCart
+          .toString();
+      print("value to update text" + _text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> seatCollesction = FirebaseFirestore.instance
@@ -29,18 +45,6 @@ class _AllseatViewState extends State<AllseatView> {
         .collection('VIPA')
         .orderBy('SetatNo', descending: false)
         .snapshots();
-    final int provider =
-        Provider.of<TicketDataProvider>(context, listen: false).listInCart;
-
-    String _text = "0";
-
-    void _updateText() {
-      setState(() {
-        _text = Provider.of<TicketDataProvider>(context, listen: false)
-            .listInCart
-            .toString();
-      });
-    }
 
     return SafeArea(
       child: Scaffold(
@@ -54,6 +58,7 @@ class _AllseatViewState extends State<AllseatView> {
           actions: [
             Row(
               children: [
+                // ElevatedButton(onPressed: _updateText, child:Text("Test")),
                 Text(
                   'Seats',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -114,9 +119,10 @@ class _AllseatViewState extends State<AllseatView> {
                               if (data['Status'] == 'Available') {
                                 Bookingservices().bookingOnProgress(
                                     document.id.toString(), data['SetatNo']);
-                                _updateText;
+                                Bookingservices()
+                                    .ticketList(context)
+                                    .then((_) => _updateText);
                               } else if (data['Status'] == 'OnProgress') {
-                                //  alreadySoldTicket(data['Status']).toString();
                                 bookingOnProgress();
                               } else {
                                 alreadySoldTicket(data['Status']).toString();
@@ -183,6 +189,19 @@ class _AllseatViewState extends State<AllseatView> {
                     Navigator.pop(context);
                   },
                   child: Text("OK")),
+            ],
+          );
+        });
+  }
+
+  updateStatePop() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text("Confim only"),
+            actions: [
+              ElevatedButton(onPressed: _updateText, child: Text("Buy it"))
             ],
           );
         });

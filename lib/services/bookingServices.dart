@@ -36,7 +36,9 @@ class Bookingservices {
         .then((QuerySnapshot querySnapshot) {
       print(querySnapshot.docs.length);
       // TicketDataProvider().getLiskInCart(querySnapshot.docs.length);
+      print("value yetu"+querySnapshot.docs.length.toString());
       Provider.of<TicketDataProvider>(context,listen: false).getLiskInCart(querySnapshot.docs.length);
+      print("Value iliochukuliwa");
     });
   }
 

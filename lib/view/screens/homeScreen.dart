@@ -38,12 +38,12 @@ class _HomescreenState extends State<Homescreen> {
                 icon: Icon(Icons.sports_basketball_rounded), label: "Games"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
           ]),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     nextPageNavigation(context, AddDataScreen());
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          nextPageNavigation(context, AddDataScreen());
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 
