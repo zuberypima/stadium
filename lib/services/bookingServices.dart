@@ -10,8 +10,19 @@ class Bookingservices {
         .collection('VIPA')
         .doc(_docId)
         .update({'Status': 'OnProgress'}).then((contex) {
-                add_Booking_To_Cart(seatNumber.toString());
+      add_Booking_To_Cart(seatNumber.toString());
+    });
+  }
 
+  Future<void> direct_Ticket_Purches(String emailId, _docId, seatNumber) async {
+    await FirebaseFirestore.instance
+        .collection('UsersDetails')
+        .doc(emailId)
+        .collection('MyTickets')
+        .add({
+      'TicketNum': "0000111",
+      'SeatNum': seatNumber,
+      
     });
   }
 
@@ -36,8 +47,9 @@ class Bookingservices {
         .then((QuerySnapshot querySnapshot) {
       print(querySnapshot.docs.length);
       // TicketDataProvider().getLiskInCart(querySnapshot.docs.length);
-      print("value yetu"+querySnapshot.docs.length.toString());
-      Provider.of<TicketDataProvider>(context,listen: false).getLiskInCart(querySnapshot.docs.length);
+      print("value yetu" + querySnapshot.docs.length.toString());
+      Provider.of<TicketDataProvider>(context, listen: false)
+          .getLiskInCart(querySnapshot.docs.length);
       print("Value iliochukuliwa");
     });
   }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stadium/provider/ticketDataProvider.dart';
@@ -21,9 +22,6 @@ class _AllseatViewState extends State<AllseatView> {
   }
 
   String _text = "0";
-
-  // final int provider =
-  // Provider.of<TicketDataProvider>(context, listen: false).listInCart;
   void _updateText() {
     setState(() {
       print("vaule go to text" +
@@ -36,6 +34,8 @@ class _AllseatViewState extends State<AllseatView> {
       print("value to update text" + _text);
     });
   }
+
+  final FirebaseAuth _auth=FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,6 @@ class _AllseatViewState extends State<AllseatView> {
           actions: [
             Row(
               children: [
-                // ElevatedButton(onPressed: _updateText, child:Text("Test")),
                 Text(
                   'Seats',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -68,7 +67,6 @@ class _AllseatViewState extends State<AllseatView> {
                 ),
                 CircleAvatar(
                     child: Text(
-                  // provider.toString(),
                   _text,
                   style: TextStyle(
                       fontSize: 15,
@@ -117,8 +115,9 @@ class _AllseatViewState extends State<AllseatView> {
                           return InkWell(
                             onTap: () {
                               if (data['Status'] == 'Available') {
-                                Bookingservices().bookingOnProgress(
-                                    document.id.toString(), data['SetatNo']);
+                                // Bookingservices().bookingOnProgress(
+                                //     document.id.toString(), data['SetatNo']);
+                                startBuyingTicket(_auth.currentUser!.email.toString(),document.id.toString(), data['SetatNo']);
                                 Bookingservices()
                                     .ticketList(context)
                                     .then((_) => _updateText);
@@ -157,6 +156,42 @@ class _AllseatViewState extends State<AllseatView> {
         ),
       ),
     );
+  }
+
+    startBuyingTicket(String userEmialId, seatID,seatNumber) {
+    return showDialog(
+        context: context,
+        builder: (contex) {
+          return AlertDialog(
+            content: Container(
+                height: MediaQuery.of(context).size.height / 2.5,
+                child: const Center(
+                  child: Text("Your about to by a Ticket"),
+                )),
+            actions: [
+              ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.red),
+                      foregroundColor: WidgetStatePropertyAll(Colors.white)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancel")),
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.green),
+                      foregroundColor: WidgetStatePropertyAll(Colors.white)),
+                  onPressed: () {
+                    Bookingservices().direct_Ticket_Purches(userEmialId,seatID,seatNumber,);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Buy It")),
+            ],
+          );
+        });
   }
 
   bookingOnProgress() {

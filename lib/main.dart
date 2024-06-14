@@ -6,6 +6,7 @@ import 'package:stadium/view/allSeatView.dart';
 import 'package:stadium/view/screens/addDataTofirebase.dart';
 import 'package:stadium/view/screens/homeScreen.dart';
 import 'package:stadium/view/screens/loginpage.dart';
+import 'package:stadium/view/screens/myticketsPage.dart';
 import 'package:stadium/view/screens/profileScreen.dart';
 import 'package:stadium/view/screens/registrationScreen.dart';
 import 'package:stadium/view/seetViewPage.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         useMaterial3: true,
       ),
-      home:ProfileScreen(),
+      home:Homescreen(),
     );
   }
 }

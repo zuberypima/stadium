@@ -26,15 +26,15 @@ Widget gameListView() {
                 nextPageNavigation(context, StartBooking());
               },
               child: Card(
-                color: Colors.blueGrey,
+                color: Colors.lightBlue[100],
                 child: ListTile(
                   leading:const CircleAvatar(child: Text("TM")),
                   title: Text(
                     data['HomeTeam'],
-                    style: TextStyle(color: textColorOne),
+                    style: TextStyle(color:Colors.black),
                   ),
                   subtitle: Text(data['AwayTeam'],
-                      style: TextStyle(color: textColorOne)),
+                      style: TextStyle(color: Colors.black)),
                 ),
               ),
             );

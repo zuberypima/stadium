@@ -25,7 +25,8 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       body: screenList.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(176, 76, 175, 79),
+          // backgroundColor: Color.fromARGB(176, 76, 175, 79),
+          backgroundColor: Colors.lightBlue,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.black,
           elevation: 0,
