@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stadium/provider/ticketDataProvider.dart';
 import 'package:stadium/services/bookingServices.dart';
 import 'package:stadium/services/dataservices.dart';
 
@@ -12,6 +14,13 @@ class AllseatView extends StatefulWidget {
 
 class _AllseatViewState extends State<AllseatView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Bookingservices().ticketList(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> seatCollesction = FirebaseFirestore.instance
         .collection('StadiumSeats')
@@ -19,13 +28,23 @@ class _AllseatViewState extends State<AllseatView> {
         .collection('VIPA')
         .orderBy('SetatNo', descending: false)
         .snapshots();
+    final int provider =
+        Provider.of<TicketDataProvider>(context, listen: false).listInCart;
+    String ticketListLength() {
+      String length = "0";
+      setState(() {
+        length = provider.toString();
+      });
+      return length;
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.green,
           title: Text(
-            "All Seat View",
+            "All Seat View" + provider.toString(),
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -88,7 +107,7 @@ class _AllseatViewState extends State<AllseatView> {
                         )
                       ],
                     ),
-                    const Column(
+                     Column(
                       children: [
                         Icon(
                           Icons.book_outlined,
@@ -96,10 +115,10 @@ class _AllseatViewState extends State<AllseatView> {
                           color: Colors.blueGrey,
                         ),
                         Text(
-                          '0',
+                          provider.toString(),
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.w600),
-                        )
+                        ),
                       ],
                     )
                   ],
@@ -139,12 +158,13 @@ class _AllseatViewState extends State<AllseatView> {
                             onTap: () {
                               if (data['Status'] == 'Available') {
                                 // alreadySoldTicket(data['Status']).toString();
-                                Bookingservices().bookingOnProgress(document.id.toString());
-                              } else if (data['Status'] =='OnProgress') {
+                                Bookingservices().bookingOnProgress(
+                                    document.id.toString(), data['SetatNo']);
+                              } else if (data['Status'] == 'OnProgress') {
                                 //  alreadySoldTicket(data['Status']).toString();
                                 bookingOnProgress();
                               } else {
-                                 alreadySoldTicket(data['Status']).toString();
+                                alreadySoldTicket(data['Status']).toString();
                               }
                             },
                             child: Card(

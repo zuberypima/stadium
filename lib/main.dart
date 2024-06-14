@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stadium/provider/ticketDataProvider.dart';
 import 'package:stadium/view/allSeetView.dart';
 import 'package:stadium/view/screens/addDataTofirebase.dart';
 import 'package:stadium/view/screens/homeScreen.dart';
@@ -16,7 +18,13 @@ void main() async {
     messagingSenderId: "568287323336",
     projectId: "stadium-37525",
   ));
-  runApp(const MyApp());
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_)=>TicketDataProvider()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         useMaterial3: true,
       ),
-      home:AllseatView() ,
+      home: AllseatView(),
     );
   }
 }
