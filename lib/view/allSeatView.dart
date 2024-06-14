@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:stadium/provider/ticketDataProvider.dart';
 import 'package:stadium/services/bookingServices.dart';
 import 'package:stadium/services/dataservices.dart';
+import 'package:stadium/view/widgets/indicatorContainer.dart';
 
 class AllseatView extends StatefulWidget {
   AllseatView({super.key});
@@ -30,12 +31,15 @@ class _AllseatViewState extends State<AllseatView> {
         .snapshots();
     final int provider =
         Provider.of<TicketDataProvider>(context, listen: false).listInCart;
-    String ticketListLength() {
-      String length = "0";
+
+    String _text = "0";
+
+    void _updateText() {
       setState(() {
-        length = provider.toString();
+        _text = Provider.of<TicketDataProvider>(context, listen: false)
+            .listInCart
+            .toString();
       });
-      return length;
     }
 
     return SafeArea(
@@ -44,86 +48,37 @@ class _AllseatViewState extends State<AllseatView> {
           elevation: 0,
           backgroundColor: Colors.green,
           title: Text(
-            "All Seat View" + provider.toString(),
+            "All Seat View",
             style: TextStyle(color: Colors.white),
           ),
+          actions: [
+            Row(
+              children: [
+                Text(
+                  'Seats',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                CircleAvatar(
+                    child: Text(
+                  // provider.toString(),
+                  _text,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.blue),
+                )),
+              ],
+            )
+          ],
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 8,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, top: 5),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 20,
-                                width: 20,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text("Available Seat"),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, top: 5),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 20,
-                                width: 20,
-                                color: Colors.green,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text("On Progress"),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, top: 5),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.not_accessible_rounded,
-                                color: Colors.red,
-                              ),
-                              Text("Sold Out Seat"),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                     Column(
-                      children: [
-                        Icon(
-                          Icons.book_outlined,
-                          size: 30,
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          provider.toString(),
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+              indicatoContainer(context),
               Expanded(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height / 1.3,
@@ -157,9 +112,9 @@ class _AllseatViewState extends State<AllseatView> {
                           return InkWell(
                             onTap: () {
                               if (data['Status'] == 'Available') {
-                                // alreadySoldTicket(data['Status']).toString();
                                 Bookingservices().bookingOnProgress(
                                     document.id.toString(), data['SetatNo']);
+                                _updateText;
                               } else if (data['Status'] == 'OnProgress') {
                                 //  alreadySoldTicket(data['Status']).toString();
                                 bookingOnProgress();

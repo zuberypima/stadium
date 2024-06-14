@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stadium/view/allSeetView.dart';
+import 'package:stadium/view/allSeatView.dart';
 import 'package:stadium/view/widgets/seatLayout.dart';
 
 Widget stadium_layout(context, category) {

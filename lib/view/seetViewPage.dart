@@ -22,17 +22,20 @@ class _StadiumLayOutState extends State<StadiumLayOut> {
             children: [
               Positioned(
                   child: Align(
-                      alignment: Alignment.center, child: pithContainer(context))),
-             
+                      alignment: Alignment.center,
+                      child: pithContainer(context))),
               Positioned(
                   child: Align(
-                      alignment: Alignment.centerLeft, child: leftPart(context))),
+                      alignment: Alignment.centerLeft,
+                      child: leftPart(context))),
               Positioned(
                   child: Align(
-                      alignment: Alignment.centerRight, child: rightPart(context))),
+                      alignment: Alignment.centerRight,
+                      child: rightPart(context))),
               Positioned(
                   child: Align(
-                      alignment: Alignment.topCenter, child: northPart(context))),
+                      alignment: Alignment.topCenter,
+                      child: northPart(context))),
               Positioned(
                   child: Align(
                       alignment: Alignment.bottomCenter,
