@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:stadium/constants/constants.dart';
-import 'package:stadium/services/dataservices.dart';
 import 'package:stadium/view/widgets/gameListView.dart';
 
 class GamesPage extends StatefulWidget {
@@ -15,7 +12,6 @@ class GamesPage extends StatefulWidget {
 class _GamesPageState extends State<GamesPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     generateWeekDates(DateTime.now());
   }

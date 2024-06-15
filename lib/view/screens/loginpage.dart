@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:stadium/constants/constants.dart';
 import 'package:stadium/services/authenticationService.dart';
-import 'package:stadium/view/screens/homeScreen.dart';
 import 'package:stadium/view/screens/registrationScreen.dart';
 import 'package:stadium/view/widgets/formfieldOne.dart';
 
@@ -21,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Log in"),
+        title:const Text("Log in"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -36,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text("Password"),
             formFielOne("Password", _password, true),
-            SizedBox(
+           const SizedBox(
               height: 10,
             ),
             SizedBox(
