@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:stadium/services/authenticationService.dart';
 import 'package:stadium/view/widgets/formfieldOne.dart';
 
-class AddPaymentMetho extends StatefulWidget {
-  const AddPaymentMetho({super.key});
+class AddPaymentMethod extends StatefulWidget {
+  const AddPaymentMethod({super.key});
 
   @override
-  State<AddPaymentMetho> createState() => _AddPaymentMethoState();
+  State<AddPaymentMethod> createState() => _AddPaymentMethodState();
 }
 
-class _AddPaymentMethoState extends State<AddPaymentMetho> {
+class _AddPaymentMethodState extends State<AddPaymentMethod> {
   TextEditingController _phoneNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _AddPaymentMethoState extends State<AddPaymentMetho> {
                   Authenticationservice().userPaymentMethod('alexmm@g.com', _phoneNumber.text);
                   Navigator.pop(context);
                 },
-                child: Text("Add This Number"))
+                child: Text("Add this Number"))
           ],
         ),
       ),

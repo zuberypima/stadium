@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stadium/view/widgets/addPaymentMethod.dart';
 
 Widget paymentDetails(context) {
   return Container(
@@ -23,10 +24,10 @@ Widget paymentDetails(context) {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.lightBlue),
-                    foregroundColor: WidgetStatePropertyAll(Colors.white)),
+                    backgroundColor: WidgetStatePropertyAll(Colors.lightBlueAccent[100]),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black)),
                 onPressed: () {
-
+Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddPaymentMethod()));
                 },
                 child: Text('Add Payment Method')))
       ],

@@ -52,12 +52,11 @@ Path getClip(Size size) {
 Widget southPart(context){
 
   return ClipPath(
-  // clipper: ShapeBorderClipper(shape: BorderDirectional()),
     child: Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height/3,
       color: Colors.blue,
-      child: Center(child: Text("soutth Part")),
+      child: Center(child: Text("Soutth Part")),
     ),
   );
 

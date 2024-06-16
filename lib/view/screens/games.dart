@@ -34,7 +34,6 @@ class _GamesPageState extends State<GamesPage> {
                 ],
               ),
             ),
-            // backgroundColor: mainbackgroundColor,
             body: TabBarView(
               children: [
                 gameListView(),

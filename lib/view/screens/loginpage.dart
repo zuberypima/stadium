@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Log in"),
+        title: const Text("Log in"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text("Password"),
             formFielOne("Password", _password, true),
-           const SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -45,13 +45,13 @@ class _LoginPageState extends State<LoginPage> {
                         foregroundColor: WidgetStatePropertyAll(Colors.white)),
                     onPressed: () {
                       try {
-                        Authenticationservice().signinUserWithEmailAndPassword(
-                            _emailController.text, _password.text).then((context){
-                              print("user login");
-                            });
-                                                          Navigator.pop(context);
-
-
+                        Authenticationservice()
+                            .signinUserWithEmailAndPassword(
+                                _emailController.text, _password.text)
+                            .then((context) {
+                          print("user login");
+                        });
+                        Navigator.pop(context);
                       } catch (e) {}
 
                       // Navigator.of(context).push(MaterialPageRoute(

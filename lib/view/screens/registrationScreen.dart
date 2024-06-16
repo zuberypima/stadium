@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stadium/services/authenticationService.dart';
 import 'package:stadium/view/screens/loginpage.dart';

@@ -27,7 +27,7 @@ Widget accountBalanceContainer(context) {
         return balanceContainer(context, data['Ammount']);
       }
 
-      return Text("loading");
+      return Center(child: CircularProgressIndicator());
     },
   );
 }
@@ -52,21 +52,21 @@ Widget balanceContainer(context,String balance) {
         ),
         const SizedBox(height: 3),
         Text(
-          'Tsh',
+          'Tsh /=',
           style: TextStyle(fontSize: 15),
         ),
-        SizedBox(height: 5),
-        Center(
-          child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStatePropertyAll(Colors.lightBlueAccent[100]),
-                      foregroundColor: WidgetStatePropertyAll(Colors.black)),
-                  onPressed: () {},
-                  child: Text('Fund Account'))),
-        )
+        // SizedBox(height: 5),
+        // Center(
+        //   child: SizedBox(
+        //       width: MediaQuery.of(context).size.width,
+        //       child: ElevatedButton(
+        //           style: ButtonStyle(
+        //               backgroundColor:
+        //                   WidgetStatePropertyAll(Colors.lightBlueAccent[100]),
+        //               foregroundColor: WidgetStatePropertyAll(Colors.black)),
+        //           onPressed: () {},
+        //           child: Text('Fund Account'))),
+        // )
       ],
     ),
   );
